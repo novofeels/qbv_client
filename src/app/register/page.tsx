@@ -259,7 +259,7 @@ export default function RegisterPage() {
           <>
                   <motion.div
                   initial={{ scaleX: 0, scaleY: 0.3, originX: 0.5, rotate: -180, opacity: 0 }}
-                  animate={{ scaleX: 0.6, scaleY: 0.6, rotate: 0, opacity: 1 }}
+                  animate={{ scaleX: 0.8, scaleY: 0.8, rotate: 0, opacity: 1 }}
                   transition={{ duration: 1, ease: "easeInOut" }}
                 >
                   <Image
@@ -277,9 +277,9 @@ export default function RegisterPage() {
             transition={{ duration: 2, ease: "easeOut" }}
             className="flex flex-col items-center text-center mt-4 w-full max-w-md"
           >
-            <h2 className="text-2xl font-bold">That's it!</h2>
+            <h2 className="text-2xl font-bold">That&apos;s it!</h2>
             <p className="mt-1 text-lg">
-              We'll email you when your brand profile is ready
+              We&apos;ll email you when your brand profile is ready
             </p>
           </motion.div>
           </>

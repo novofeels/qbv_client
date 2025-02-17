@@ -1,11 +1,16 @@
-// src/app/approval/page.tsx
-'use client';
+"use client";
+
 
 export default function ApprovalPage() {
+
+
+  // Format phone: (###) ###-####
+  
+  // Submit
+
   return (
-    <div>
-      {/* Render the categories and scraped information for review */}
-      stuff here
-    </div>
-  );
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white px-4">
+      
+      </div>
+  )
 }
