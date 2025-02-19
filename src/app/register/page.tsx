@@ -44,7 +44,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 text-base px-4">
       {/* Using motion.div with layout around everything that can shift */}
 
       {!showMessage && (
@@ -52,10 +52,10 @@ export default function RegisterPage() {
     <Image
       src="/staticLogo.png"
       alt="Qusaiq Logo"
-      width={200}
-      height={200}
+      width={150}
+      height={150}
       className={
-        "mb-2 " + (isSubmitting ? "spinOut" : "spinIn")
+        " " + (isSubmitting ? "spinOut" : "spinIn")
       }
     />
 
@@ -65,12 +65,12 @@ export default function RegisterPage() {
             layout  // also track layout changes for headings + form
             transition={{ layout: { duration: 0.6, ease: "easeInOut" } }}
             className={
-              "flex flex-col items-center text-center mt-4 w-full max-w-md " +
+              "flex flex-col items-center text-center mt-2 w-full max-w-md " +
               (isSubmitting ? "sendToCyberspace" : "")
             }
           >
             <h1 className="text-3xl font-bold">Qusaiq</h1>
-            <p className="mt-1 text-lg">Find out your Q Score</p>
+            <p className="mt-1 text-lg">The easiest way to find your brand value</p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6 w-full">
               {/* First & Last Name */}
@@ -81,12 +81,12 @@ export default function RegisterPage() {
                     id="firstName"
                     required
                     placeholder=" "
-                    className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                    className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                   />
                   <label
                     htmlFor="firstName"
                     className="absolute left-4 transition-all duration-300 ease-in-out
-                      peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                      peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                       peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                       peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                   >
@@ -99,12 +99,12 @@ export default function RegisterPage() {
                     id="lastName"
                     required
                     placeholder=" "
-                    className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                    className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                   />
                   <label
                     htmlFor="lastName"
                     className="absolute left-4 transition-all duration-300 ease-in-out
-                      peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                      peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                       peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                       peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                   >
@@ -120,12 +120,12 @@ export default function RegisterPage() {
                   id="companyName"
                   required
                   placeholder=" "
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="companyName"
                   className="absolute left-4 transition-all duration-300 ease-in-out
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                     peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                 >
@@ -140,12 +140,12 @@ export default function RegisterPage() {
                   id="brandName"
                   required
                   placeholder=" "
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="brandName"
                   className="absolute left-4 transition-all duration-300 ease-in-out
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                     peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                 >
@@ -160,12 +160,12 @@ export default function RegisterPage() {
                   id="email"
                   required
                   placeholder=" "
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="email"
                   className="absolute left-4 transition-all duration-300 ease-in-out
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                     peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                 >
@@ -182,12 +182,12 @@ export default function RegisterPage() {
                   placeholder=" "
                   value={mobile}
                   onChange={handlePhoneChange}
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="mobile"
                   className="absolute left-4 transition-all duration-300 ease-in-out
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                     peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                 >
@@ -204,12 +204,12 @@ export default function RegisterPage() {
                   placeholder=" "
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="password"
                   className="absolute left-4 transition-all duration-300 ease-in-out
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                     peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                 >
@@ -226,12 +226,12 @@ export default function RegisterPage() {
                   placeholder=" "
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-black text-white rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="confirmPassword"
                   className="absolute left-4 transition-all duration-300 ease-in-out
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-700
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                     peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
                 >
@@ -242,13 +242,14 @@ export default function RegisterPage() {
               {!passwordsMatch && confirmPassword.length > 0 && (
                 <p className="text-red-500 text-sm">Passwords do not match.</p>
               )}
-              <button
-                type="submit"
-                className="btn btn-primary w-full rounded-full"
-                disabled={!passwordsMatch}
-              >
-                Register
-              </button>
+<button
+  type="submit"
+  className="btn bg-[#7030A0] w-full rounded-full disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed"
+  disabled={!passwordsMatch}
+>
+  Register
+</button>
+
             </form>
           </motion.div>
           </>
