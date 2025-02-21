@@ -114,7 +114,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 text-base px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-base px-4">
       {!showMessage && (
         <>
           <Image
@@ -150,14 +150,15 @@ export default function RegisterPage() {
                     onBlur={() =>
                       setTouched((prev) => ({ ...prev, firstName: true }))
                     }
-                    className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                    className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                   />
                   <label
                     htmlFor="firstName"
                     className="absolute left-4 transition-all duration-300 ease-in-out
                       peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                      peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                      peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                      peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                      peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                   >
                     First Name
                   </label>
@@ -173,14 +174,16 @@ export default function RegisterPage() {
                     onBlur={() =>
                       setTouched((prev) => ({ ...prev, lastName: true }))
                     }
-                    className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                    className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                   />
                   <label
                     htmlFor="lastName"
                     className="absolute left-4 transition-all duration-300 ease-in-out
                       peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                      peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                      peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                      peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                      peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]
+"
                   >
                     Last Name
                   </label>
@@ -199,14 +202,15 @@ export default function RegisterPage() {
                   onBlur={() =>
                     setTouched((prev) => ({ ...prev, companyName: true }))
                   }
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="companyName"
                   className="absolute left-4 transition-all duration-300 ease-in-out
                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
                   Company Name
                 </label>
@@ -224,14 +228,15 @@ export default function RegisterPage() {
                   onBlur={() =>
                     setTouched((prev) => ({ ...prev, brandName: true }))
                   }
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="brandName"
                   className="absolute left-4 transition-all duration-300 ease-in-out
                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
                   Brand Name
                 </label>
@@ -249,14 +254,15 @@ export default function RegisterPage() {
                   onBlur={() =>
                     setTouched((prev) => ({ ...prev, email: true }))
                   }
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="email"
                   className="absolute left-4 transition-all duration-300 ease-in-out
                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
                   Email Address
                 </label>
@@ -280,14 +286,15 @@ export default function RegisterPage() {
                   onBlur={() =>
                     setTouched((prev) => ({ ...prev, mobile: true }))
                   }
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="mobile"
                   className="absolute left-4 transition-all duration-300 ease-in-out
                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
                   Mobile Number
                 </label>
@@ -311,14 +318,15 @@ export default function RegisterPage() {
                   onBlur={() =>
                     setTouched((prev) => ({ ...prev, password: true }))
                   }
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="password"
                   className="absolute left-4 transition-all duration-300 ease-in-out
                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
                   Password
                 </label>
@@ -338,14 +346,15 @@ export default function RegisterPage() {
                   onBlur={() =>
                     setTouched((prev) => ({ ...prev, confirmPassword: true }))
                   }
-                  className="peer block w-full px-4 py-2 border border-gray-800 bg-gray-100 text-black rounded-full focus:outline-none"
+                  className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-none"
                 />
                 <label
                   htmlFor="confirmPassword"
                   className="absolute left-4 transition-all duration-300 ease-in-out
                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-blue-500
-                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-blue-500"
+                    peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+
+                    peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
                   Confirm Password
                 </label>
