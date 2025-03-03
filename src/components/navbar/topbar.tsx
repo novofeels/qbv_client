@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Topbar = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#280c3d] border-b border-gray500 text-white flex items-center p-4 shadow-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#280c3d] border-b border-gray500 text-white flex items-center p-4 shadow-xl">
       <div className="flex items-center">
         {/* Replace '/logo.png' with your actual logo path */}
         <Image src="/staticLogo.png" alt="Logo" width={30} height={30} className='mr-6'/>

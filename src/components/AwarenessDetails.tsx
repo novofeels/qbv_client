@@ -38,7 +38,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
             Awareness Analysis
           </h3>
           <p className={`text-center font-medium ${getStatusColor(constructData.status)}`}>
-            {constructData.status}
+          Measures your brand's visibility across digital channels including website traffic, social media presence, and industry mentions.
           </p>
         </div>
         
@@ -58,7 +58,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 <div className="h-2.5 rounded-full" style={{ width: `${constructData.traffic}%`, backgroundColor: getRingColor(constructData.traffic) }}></div>
                 
                 {/* Detailed tooltip for Traffic */}
-                <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-28 w-72 left-1/2 transform -translate-x-1/2">
+                <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-44 w-72 left-1/2 transform -translate-x-1/2">
                   <p className="font-bold mb-1">Website Traffic</p>
                   <p className="mb-2">Only 20% of industry benchmark for total visitors</p>
                   <div>
@@ -99,7 +99,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 <div className="h-2.5 rounded-full" style={{ width: `${constructData.engagement}%`, backgroundColor: getRingColor(constructData.engagement) }}></div>
                 
                 {/* Detailed tooltip for Engagement */}
-                <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-28 w-72 left-1/2 transform -translate-x-1/2">
+                <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-44 w-72 left-1/2 transform -translate-x-1/2">
                   <p className="font-bold mb-1">User Engagement</p>
                   <p className="mb-2">Poor engagement with high bounce rate</p>
                   <div>
@@ -140,7 +140,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 <div className="h-2.5 rounded-full" style={{ width: `${constructData.social}%`, backgroundColor: getRingColor(constructData.social) }}></div>
                 
                 {/* Detailed tooltip for Social */}
-                <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-28 w-72 left-1/2 transform -translate-x-1/2">
+                <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-56 w-72 left-1/2 transform -translate-x-1/2">
                   <p className="font-bold mb-1">Social Media Presence</p>
                   <p className="mb-2">Nearly non-existent social media presence</p>
                   <div>
