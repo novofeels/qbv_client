@@ -12,6 +12,7 @@ type Competitor = {
   URL: string;
 };
 
+
 type ApprovalData = {
   basics: {
     firstName: string;
@@ -177,7 +178,7 @@ function ProgressBar({ currentIndex, total, sectionOrder }: ProgressBarProps) {
         return (
           <div key={section} className="flex flex-col items-center">
             <div className={circleClasses}></div>
-            <span className="text-xs capitalize">{section}</span>
+            <span className="text-xs capitalize text-black">{section}</span>
           </div>
         );
       })}
@@ -193,8 +194,8 @@ const FinalScreen = () => (
     animate={{ opacity: 1 }}
     transition={{ duration: 1 }}
   >
-    <h2 className="font-bold text-3xl">Thanks!</h2>
-    <p className="mt-4 text-lg">
+    <h2 className="font-bold text-3xl text-black">Thanks!</h2>
+    <p className="mt-4 text-lg text-gray-800">
       Our robot is hard at work crunching the numbers...
     </p>
     <motion.div
@@ -204,7 +205,7 @@ const FinalScreen = () => (
     >
       <FaRobot className="w-16 h-16 text-[#7030A0]" />
     </motion.div>
-    <p className="mt-4 text-lg">
+    <p className="mt-4 text-lg text-gray-800">
       We'll be in touch with the results soon!
     </p>
   </motion.div>
@@ -379,9 +380,9 @@ export default function ApprovalPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.3, duration: 0.5 }}
-                className="border p-2 mb-2 shadow-sm rounded-xl hover:shadow-md hover:border-2"
+                className="border p-2 mb-2 shadow-sm rounded-xl hover:shadow-md hover:border-2 bg-gray-50"
               >
-                <h4 className="font-semibold text-center mb-2">Competitor {idx + 1}</h4>
+                <h4 className="font-semibold text-center mb-2 text-gray-800">Competitor {idx + 1}</h4>
                 {renderField("competitors", "brand", "Brand", idx)}
                 {renderField("competitors", "URL", "Website", idx)}
               </motion.div>
@@ -432,15 +433,15 @@ export default function ApprovalPage() {
             exit={{ opacity: 0 }}
             className="text-center mt-4"
           >
-            <h2 className="font-bold text-3xl">Hi Jon, Welcome back to Qusaiq</h2>
+            <h2 className="font-bold text-3xl text-gray-800">Hi Jon, Welcome back to Qusaiq</h2>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}
-              className="max-w-lg mt-8"
+              className="max-w-lg mt-8 text-gray-800"
             >
-              Here's what we found about{" "}
-              <span className="font-bold text-lg">ACME Corporation,</span> please review each data point, feel free to edit any field, and confirm each section.
+              Here's what we found about{" "} 
+              <span className="font-bold text-lg text-black">ACME Corporation,</span> please review each data point, feel free to edit any field, and confirm each section.
             </motion.div>
             <motion.button
               onClick={() => {
@@ -478,7 +479,7 @@ export default function ApprovalPage() {
                 exit="exit"
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="text-xl text-center font-semibold mb-2">
+                <h2 className="text-xl text-center font-semibold mb-2 text-black">
                   {currentSection.toUpperCase()}
                 </h2>
                 {renderSection()}
