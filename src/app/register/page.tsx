@@ -133,8 +133,8 @@ export default function RegisterPage() {
               (isSubmitting ? "sendToCyberspace" : "")
             }
           >
-            <h1 className="text-3xl font-bold">Qusaiq</h1>
-            <p className="mt-1 text-lg">The easiest way to find your brand value</p>
+            <h1 className="text-3xl font-bold text-gray-800">Qusaiq</h1>
+            <p className="mt-1 text-lg text-gray-800">The easiest way to find your brand value</p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6 w-full">
               {/* First & Last Name */}
