@@ -1,7 +1,68 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Define types for our state
+interface SocialChannel {
+  name: string;
+  score: number;
+  icon: string;
+  color: string;
+}
+
+interface Competitor {
+  name: string;
+  score: number;
+  status: string;
+  traffic: number;
+  engagement: number;
+  social: number;
+  keyStrengths: string[];
+  areasForImprovement: string[];
+}
+
+interface Subconstruct {
+  name: string;
+  score: number;
+  description: string;
+}
+
+interface ConstructData {
+  score: number;
+  traffic?: number;
+  engagement?: number;
+  social?: number;
+  status: string;
+  details?: string;
+  socialChannels?: SocialChannel[];
+  competitors?: Competitor[];
+  subconstructs: Subconstruct[];
+  recommendations: string[];
+}
+
+interface Construct {
+  name: string;
+  value: number;
+  details: string;
+  data: ConstructData | null;
+}
+
+interface DashboardState {
+  pinnacleData: {
+    name: string;
+    overallScore: number;
+    status: string;
+    keyStrengths: string[];
+    areasForImprovement: string[];
+  };
+  awarenessData: ConstructData;
+  placeholderData: {
+    subconstructs: Subconstruct[];
+    recommendations: string[];
+  };
+  constructs: Construct[];
+}
+
 // Initial state based on the data from your component
-const initialState = {
+const initialState: DashboardState = {
   // Pinnacle Financial Partners data
   pinnacleData: {
     name: "Pinnacle Financial Partners",
@@ -179,7 +240,7 @@ const initialState = {
 };
 
 // Helper function to populate the construct data
-const populateConstructData = (state) => {
+const populateConstructData = (state: DashboardState) => {
   // Deep copy to avoid reference issues
   const newConstructs = JSON.parse(JSON.stringify(state.constructs));
   
