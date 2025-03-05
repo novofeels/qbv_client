@@ -7,9 +7,43 @@ import { useSelector } from "react-redux";
 import { getStatusColor, getRingColor } from "@/utils/colorUtils";
 import { RootState } from "@/store";
 
+// Add these type definitions
+interface SocialChannel {
+  name: string;
+  score: number;
+  iconName?: string;
+  icon?: string;
+  color: string;
+  followers?: number;
+  competitorData?: Record<string, string>;
+}
+
+interface CompetitorData {
+  name: string;
+  score: number;
+  traffic: number;
+  engagement: number;
+  social: number;
+  status: string;
+  keyStrengths: string[];
+}
+
 interface AwarenessDetailsProps {
-  constructData: any;
-  pinnacleData: any;
+  constructData: {
+    socialChannels: SocialChannel[];
+    score: number;
+    traffic: number;
+    engagement: number;
+    social: number;
+    status: string;
+    details: string;
+    recommendations: string[];
+    competitors: CompetitorData[];
+  };
+  pinnacleData: {
+    keyStrengths: string[];
+    areasForImprovement: string[];
+  };
 }
 
 const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps) => {
@@ -186,15 +220,19 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
         <div className="mt-8">
           <h4 className="font-medium text-gray-700 mb-4">Social Media Presence:</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {constructData.socialChannels.map((channel, idx) => {
-              // Use dynamic import for icons
-              const Icon = channel.icon === 'FaLinkedin' 
-                ? FaLinkedin 
-                : channel.icon === 'FaFacebook' 
-                  ? FaFacebook 
-                  : channel.icon === 'FaTwitter' || channel.icon === 'FaX' || channel.icon === 'SiX'
-                    ? SiX 
-                    : FaInstagram;
+            {constructData.socialChannels.map((channel: SocialChannel, idx: number) => {
+              // Use dynamic import for icons based on iconName or icon property
+              const getIconComponent = (channel: SocialChannel) => {
+                const iconName = channel.iconName || channel.icon;
+                
+                if (iconName === 'linkedin' || iconName === 'FaLinkedin') return FaLinkedin;
+                if (iconName === 'facebook' || iconName === 'FaFacebook') return FaFacebook;
+                if (iconName === 'x' || iconName === 'twitter' || iconName === 'FaTwitter' || iconName === 'FaX' || iconName === 'SiX') return SiX;
+                if (iconName === 'instagram' || iconName === 'FaInstagram') return FaInstagram;
+                return FaInstagram; // Default fallback
+              };
+              
+              const Icon = getIconComponent(channel);
               
               return (
                 <div 
@@ -216,7 +254,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                         // Check for both X and Twitter for compatibility
                         c.name === channel.name || 
                         (c.name === 'X' && channel.name === 'Twitter') || 
-                        (c.name === 'Twitter' && channel.name === 'X'))?.followers.toLocaleString() || 'N/A'}</span>
+                        (c.name === 'Twitter' && channel.name === 'X'))?.followers?.toLocaleString() || 'N/A'}</span>
                     </p>
                     <p className="font-bold mt-2 mb-1 border-b pb-1">Competitor Data</p>
                     {Object.entries(detailedAwarenessData.socialChannels.find(c => 
@@ -249,7 +287,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
             <h4 className="font-medium text-green-800 mb-2">Strengths</h4>
             {pinnacleData.keyStrengths.length > 0 ? (
               <ul className="text-sm">
-                {pinnacleData.keyStrengths.map((strength, idx) => (
+                {pinnacleData.keyStrengths.map((strength: string, idx: number) => (
                   <li key={idx} className="mb-1 flex items-start">
                     <span className="mr-2 text-green-500">•</span> {strength}
                   </li>
@@ -263,7 +301,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
           <div className="bg-red-50 p-4 rounded-md">
             <h4 className="font-medium text-red-800 mb-2">Areas for Improvement</h4>
             <ul className="text-sm">
-              {pinnacleData.areasForImprovement.map((area, idx) => (
+              {pinnacleData.areasForImprovement.map((area: string, idx: number) => (
                 <li key={idx} className="mb-1 flex items-start">
                   <span className="mr-2 text-red-500">•</span> {area}
                 </li>
@@ -333,7 +371,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                     <td className={`px-3 py-4 whitespace-nowrap text-center ${getStatusColor(constructData.status)}`}>{constructData.status}</td>
                   </tr>
                   {/* Competitor rows */}
-                  {constructData.competitors.map((competitor: any, idx: number) => (
+                  {constructData.competitors.map((competitor: CompetitorData, idx: number) => (
                     <tr key={idx} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                       <td className="px-3 py-4 whitespace-nowrap font-medium">{competitor.name}</td>
                       <td className="px-3 py-4 whitespace-nowrap text-center">{competitor.score}</td>
@@ -361,29 +399,29 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                           style={{ width: `${constructData.score}%` }}
                         ></div>
                         
-                        {/* Tooltip with positioning data */}
-                        <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-32 left-1/2 transform -translate-x-1/2 w-64">
-                          <p className="font-bold mb-1 border-b pb-1">Competitive Position</p>
-                          <div className="flex justify-between my-1">
-                            <span>Your Position:</span>
-                            <span>{competitorPositioning.awareness.yourPosition}</span>
-                          </div>
-                          <div className="flex justify-between my-1">
-                            <span>Percentile:</span>
-                            <span>{competitorPositioning.awareness.percentile}</span>
-                          </div>
-                          <div className="flex justify-between my-1">
-                            <span>Gap:</span>
-                            <span>{competitorPositioning.awareness.gap}</span>
-                          </div>
-                        </div>
+{/* Tooltip with positioning data */}
+<div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-32 left-1/2 transform -translate-x-1/2 w-64">
+  <p className="font-bold mb-1 border-b pb-1">Competitive Position</p>
+  <div className="flex justify-between my-1">
+    <span>Your Position:</span>
+    <span>{competitorPositioning.awareness.yourPosition}</span>
+  </div>
+  <div className="flex justify-between my-1">
+    <span>Average:</span>
+    <span>{competitorPositioning.awareness.average}</span>
+  </div>
+  <div className="flex justify-between my-1">
+    <span>Competitors:</span>
+    <span>{competitorPositioning.awareness.competitors.length}</span>
+  </div>
+</div>
                       </div>
                     </div>
                     <span className="ml-2 text-sm font-medium">{constructData.score}</span>
                   </div>
                 </div>
                 
-                {constructData.competitors.map((competitor: any, idx: number) => (
+                {constructData.competitors.map((competitor: CompetitorData, idx: number) => (
                   <div key={idx}>
                     <div className="flex items-center">
                       <span className="w-24 text-sm">{competitor.name}</span>
