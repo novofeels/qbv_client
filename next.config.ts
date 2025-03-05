@@ -2,11 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-
-  trailingSlash: true, // This forces Next.js to output directories with trailing slashes
+  basePath: '/qbv_client',
+  assetPrefix: '/qbv_client/',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
+  // Add experimental support for hash routing
+  experimental: {
+    scrollRestoration: true,
+  }
 };
 
 export default nextConfig;
