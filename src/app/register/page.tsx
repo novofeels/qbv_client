@@ -212,7 +212,7 @@ export default function RegisterPage() {
 
                     peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
                 >
-                  Company Name
+                  Company Website
                 </label>
               </div>
 

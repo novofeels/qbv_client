@@ -1,13 +1,11 @@
 // src/features/dashboard/awarenessSlice.tsx
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
-import { SiX } from 'react-icons/si';
 
 // Types
 export type SocialChannel = {
   name: string;
   score: number;
-  icon: any; // Using any for React icons
+  iconName: string; // Changed from icon: any to iconName: string
   color: string;
   followers: number;
   competitorData: {
@@ -15,7 +13,40 @@ export type SocialChannel = {
   };
 };
 
-// Rest of your types remain the same
+// Adding missing types based on usage in initialState
+export type TrafficMetric = {
+  name: string;
+  value: number;
+  benchmark: number;
+  percentOfBenchmark: number;
+};
+
+export type Subconstruct = {
+  name: string;
+  score: number;
+  details: string;
+  status: string;
+};
+
+export type CompetitorPositioning = {
+  yourPosition: number;
+  average: number;
+  competitors: {
+    name: string;
+    value: number;
+  }[];
+};
+
+export type Competitor = {
+  name: string;
+  score: number;
+  status: string;
+  traffic: number;
+  engagement: number;
+  social: number;
+  keyStrengths: string[];
+  areasForImprovement: string[];
+};
 
 export interface AwarenessState {
   score: number;
@@ -53,7 +84,7 @@ const initialState: AwarenessState = {
     { 
       name: "LinkedIn", 
       score: 40, 
-      icon: FaLinkedin, 
+      iconName: "linkedin", // Changed from icon: FaLinkedin
       color: "#0077B5",
       followers: 20200,
       competitorData: {
@@ -65,7 +96,7 @@ const initialState: AwarenessState = {
     { 
       name: "Facebook", 
       score: 8, 
-      icon: FaFacebook, 
+      iconName: "facebook", // Changed from icon: FaFacebook
       color: "#3B5998",
       followers: 354,
       competitorData: {
@@ -77,7 +108,7 @@ const initialState: AwarenessState = {
     { 
       name: "X", 
       score: 5, 
-      icon: SiX, 
+      iconName: "x", // Changed from icon: SiX
       color: "#000000",
       followers: 207,
       competitorData: {
@@ -89,7 +120,7 @@ const initialState: AwarenessState = {
     { 
       name: "Instagram", 
       score: 2, 
-      icon: FaInstagram, 
+      iconName: "instagram", // Changed from icon: FaInstagram
       color: "#E1306C",
       followers: 520,
       competitorData: {
@@ -100,11 +131,18 @@ const initialState: AwarenessState = {
     }
   ],
   
-  // Traffic metrics and other data remain the same
-
-  // Make sure to update any Twitter references in competitors section
+  // Assuming these are the same from your original state
+  trafficMetrics: [],
+  subconstructs: [],
+  recommendations: [],
+  competitorPositioning: {
+    awareness: { yourPosition: 0, average: 0, competitors: [] },
+    traffic: { yourPosition: 0, average: 0, competitors: [] },
+    engagement: { yourPosition: 0, average: 0, competitors: [] },
+    social: { yourPosition: 0, average: 0, competitors: [] }
+  },
+  
   competitors: [
-    // ...other competitors remain the same
     {
       name: "First Horizon",
       score: 44,
@@ -123,10 +161,11 @@ const initialState: AwarenessState = {
         "Limited website traffic (54% of benchmark)"
       ]
     },
-    // ...other competitors remain the same
+    // Fill in other competitors from your original state
   ],
   
-  // Rest of the state is the same
+  isLoading: false,
+  error: null
 };
 
 // Create the slice
@@ -134,7 +173,6 @@ const awarenessSlice = createSlice({
   name: 'awareness',
   initialState,
   reducers: {
-    // Reducers remain the same
     fetchAwarenessStart(state) {
       state.isLoading = true;
       state.error = null;
