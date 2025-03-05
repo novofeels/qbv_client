@@ -2,9 +2,9 @@
 
 // app/dashboard/page.tsx
 import React, { useState } from "react";
-import Image from "next/image";
+
 import { motion } from "framer-motion";
-import { ChevronUp, TrendingUp, DollarSign, BarChart2 } from 'lucide-react';
+import { ChevronUp, DollarSign, BarChart2 } from 'lucide-react';
 import { useSelector } from "react-redux";
 
 // Import detailed component views
@@ -14,7 +14,7 @@ import CompetitionDetails from "@/components/CompetitionDetails";
 import InsightDetails from "@/components/InsightDetails";
 
 // Import utility functions
-import { getRingColor, getStatusColor } from "@/utils/colorUtils";
+import { getRingColor } from "@/utils/colorUtils";
 
 export default function DashboardPage() {
   // Get data from Redux store

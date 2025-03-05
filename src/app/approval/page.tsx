@@ -282,7 +282,7 @@ export default function ApprovalPage() {
     if (section === "competitors" && typeof index === "number") {
       value = approvalData.competitors[index][fieldKey as keyof Competitor];
     } else {
-      value = (approvalData[section] as any)[fieldKey];
+      value = (approvalData[section] as Record<string, string>)[fieldKey];
     }
     return (
       <div key={fieldKey} className="flex items-center justify-between py-3">
