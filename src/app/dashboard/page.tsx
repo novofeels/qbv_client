@@ -141,7 +141,7 @@ export default function DashboardPage() {
         <>
           {selectedConstructIndex === 0 && (
             <AwarenessDetails 
-              constructData={selectedConstruct.data} 
+              constructData={selectedConstruct?.data as any} 
               pinnacleData={pinnacleData} 
             />
           )}
