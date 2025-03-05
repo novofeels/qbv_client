@@ -390,7 +390,7 @@ export default function ApprovalPage() {
         className="text-center mt-8 mb-6"
       >
         <Image
-          src="/staticLogo.png"
+          src="/qbv_client/staticLogo.png"
           alt="Qusaiq Logo"
           width={150}
           height={150}

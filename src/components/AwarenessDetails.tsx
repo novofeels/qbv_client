@@ -72,7 +72,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
           <h3 className="text-xl md:text-2xl font-semibold text-gray-800 text-center">
             Awareness Analysis
           </h3>
-          <p className={`text-center font-medium ${getStatusColor(constructData.status)}`}>
+          <p className={`text-center font-medium`}>
           Measures your brand&apos;s visibility across digital channels including website traffic, social media presence, and industry mentions.
           </p>
         </div>
