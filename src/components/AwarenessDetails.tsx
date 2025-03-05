@@ -5,6 +5,7 @@ import { FaChevronDown, FaChevronUp, FaLinkedin, FaInstagram, FaFacebook } from 
 import { SiX } from "react-icons/si";
 import { useSelector } from "react-redux";
 import { getStatusColor, getRingColor } from "@/utils/colorUtils";
+import { RootState } from "@/store";
 
 interface AwarenessDetailsProps {
   constructData: any;
@@ -14,7 +15,7 @@ interface AwarenessDetailsProps {
 const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps) => {
   const [showCompetitors, setShowCompetitors] = useState(false);
   // Get the detailed awareness data from the awareness slice
-  const detailedAwarenessData = useSelector((state) => state.awareness);
+  const detailedAwarenessData = useSelector((state: RootState) => state.awareness);
   
   // Check if data is available before accessing properties
   const competitorPositioning = detailedAwarenessData?.competitorPositioning || {
