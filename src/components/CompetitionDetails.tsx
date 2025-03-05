@@ -62,7 +62,7 @@ const CompetitionDetails = ({ constructData, pinnacleData }: CompetitionDetailsP
           <h4 className="font-medium text-green-800 mb-2">Strengths</h4>
           {pinnacleData.keyStrengths.length > 0 ? (
             <ul className="text-sm">
-              {pinnacleData.keyStrengths.map((strength, idx) => (
+              {pinnacleData.keyStrengths.map((strength: string, idx: number) => (
                 <li key={idx} className="mb-1 flex items-start">
                   <span className="mr-2 text-green-500">•</span> {strength}
                 </li>
@@ -76,7 +76,7 @@ const CompetitionDetails = ({ constructData, pinnacleData }: CompetitionDetailsP
         <div className="bg-red-50 p-4 rounded-md">
           <h4 className="font-medium text-red-800 mb-2">Areas for Improvement</h4>
           <ul className="text-sm">
-            {pinnacleData.areasForImprovement.map((area, idx) => (
+            {pinnacleData.areasForImprovement.map((area: string, idx: number) => (
               <li key={idx} className="mb-1 flex items-start">
                 <span className="mr-2 text-red-500">•</span> {area}
               </li>
