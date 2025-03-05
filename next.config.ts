@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  // Replace 'your-repo-name' with your actual GitHub repository name
   basePath: '/qbv_client',
+  assetPrefix: '/qbv_client/', // Add this line with trailing slash
   images: {
     unoptimized: true,
   },
