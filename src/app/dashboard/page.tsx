@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronUp, DollarSign, BarChart2 } from 'lucide-react';
 import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 // Import detailed component views
 import AwarenessDetails from "@/components/AwarenessDetails";
@@ -18,8 +19,8 @@ import { getRingColor } from "@/utils/colorUtils";
 
 export default function DashboardPage() {
   // Get data from Redux store
-  const pinnacleData = useSelector((state) => state.dashboard.pinnacleData);
-  const constructs = useSelector((state) => state.dashboard.constructs);
+  const pinnacleData = useSelector((state: RootState) => state.dashboard.pinnacleData);
+  const constructs = useSelector((state: RootState) => state.dashboard.constructs);
   
   const [selectedConstructIndex, setSelectedConstructIndex] = useState<number | null>(null); // No default selection
   const handleConstructClick = (index: number) => {
