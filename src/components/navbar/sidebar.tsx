@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaHistory, FaArchive, FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaHistory, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 const Sidebar = () => {
