@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { FiEdit } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+
 import { FaRobot } from "react-icons/fa";
 
 // Updated types
@@ -46,8 +47,8 @@ const initialApprovalData: ApprovalData = {
     firstName: "John",
     lastName: "Doe",
     title: "CEO",
-    companyName: "ACME Inc.",
-    brandName: "ACME Brand",
+    companyName: "Pinnacle Financial Partners",
+    brandName: "Pinnacle",
     email: "john.doe@example.com",
     phone: "(123) 456-7890",
   },
@@ -67,9 +68,9 @@ const initialApprovalData: ApprovalData = {
       "Brand X was the only brand in the category until 2021 when several competitors entered.",
   },
   socialMedia: {
-    facebook: "https://facebook.com/acme",
-    twitter: "https://twitter.com/acme",
-    instagram: "https://instagram.com/acme",
+    facebook: "https://facebook.com/pinnacle",
+    twitter: "https://twitter.com/pinnacle",
+    instagram: "https://instagram.com/pinnacle",
   },
 };
 
@@ -117,44 +118,9 @@ const initialConfirmState: ConfirmState = {
 };
 
 // For editing, we track whether a field is in edit mode.
-type EditingState = {
-  basics: { [K in keyof ApprovalData["basics"]]: boolean };
-  financials: { [K in keyof ApprovalData["financials"]]: boolean };
-  competitors: Array<{ company: boolean; brand: boolean }>;
-  history: { [K in keyof ApprovalData["history"]]: boolean };
-  socialMedia: { [K in keyof ApprovalData["socialMedia"]]: boolean };
-};
 
-const initialEditingState: EditingState = {
-  basics: {
-    firstName: false,
-    lastName: false,
-    title: false,
-    companyName: false,
-    brandName: false,
-    email: false,
-    phone: false,
-  },
-  financials: {
-    companyRevenues: false,
-    brandRevenues: false,
-    EBITDA: false,
-  },
-  competitors: [
-    { company: false, brand: false },
-    { company: false, brand: false },
-    { company: false, brand: false },
-  ],
-  history: {
-    brandFoundingDate: false,
-    historicalTidbits: false,
-  },
-  socialMedia: {
-    facebook: false,
-    twitter: false,
-    instagram: false,
-  },
-};
+
+
 
 // A simple ProgressBar component
 type ProgressBarProps = {
@@ -163,7 +129,7 @@ type ProgressBarProps = {
   sectionOrder: SectionKey[];
 };
 
-function ProgressBar({ currentIndex, total, sectionOrder }: ProgressBarProps) {
+function ProgressBar({ currentIndex, sectionOrder }: ProgressBarProps) {
   return (
     <div className="flex items-center justify-center space-x-4 mb-4">
       {sectionOrder.map((section, idx) => {
@@ -206,7 +172,7 @@ const FinalScreen = () => (
       <FaRobot className="w-16 h-16 text-[#7030A0]" />
     </motion.div>
     <p className="mt-4 text-lg text-gray-800">
-      We'll be in touch with the results soon!
+      We&apos;ll be in touch with the results soon!
     </p>
   </motion.div>
 );
@@ -218,8 +184,8 @@ export default function ApprovalPage() {
   const [currentSection, setCurrentSection] = useState<SectionKey>("basics");
   const [approvalData, setApprovalData] = useState<ApprovalData>(initialApprovalData);
   const [confirmState, setConfirmState] = useState<ConfirmState>(initialConfirmState);
-  const [editingState] = useState<EditingState>(initialEditingState);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+
   const [logoRotation, setLogoRotation] = useState(0);
   // New state for direction: 1 for next, -1 for back.
   const [direction, setDirection] = useState(1);
@@ -228,13 +194,13 @@ export default function ApprovalPage() {
 
   // Define the order of sections.
   const sectionOrder: SectionKey[] = ["basics", "financials", "competitors", "history", "socialMedia"];
-
+  const router = useRouter();
   // Check if all fields in the current section are confirmed.
   const isSectionConfirmed = (section: SectionKey): boolean => {
     if (section === "competitors") {
       return confirmState.competitors.every(comp => comp.brand && comp.URL);
     } else {
-      return Object.values(confirmState[section] as any).every(Boolean);
+      return Object.values(confirmState[section] as Record<string, boolean>).every(Boolean);
     }
   };
 
@@ -288,8 +254,14 @@ export default function ApprovalPage() {
       setCurrentSection(sectionOrder[currentIndex + 1]);
     } else {
       // Final submission: extra rotation and set submitted true.
-      setLogoRotation(prev => prev + 360);
-      setSubmitted(true);
+      setTimeout(() => {
+        setLogoRotation(prev => prev + 360);
+        setSubmitted(true);
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 5000);
+      }, 600);
+
     }
   };
 
@@ -321,7 +293,7 @@ export default function ApprovalPage() {
             checked={
               section === "competitors" && typeof index === "number"
                 ? confirmState.competitors[index][fieldKey as keyof Competitor]
-                : (confirmState[section] as any)[fieldKey]
+                : (confirmState[section] as Record<string, boolean>)[fieldKey]
             }
             onChange={handleCheckboxChange(section, fieldKey, index)}
           />
@@ -422,7 +394,7 @@ export default function ApprovalPage() {
           alt="Qusaiq Logo"
           width={150}
           height={150}
-          className={isSubmitting ? "spinOut" : "spinIn"}
+          className="spinIn"
         />
       </motion.div>
       {showIntro ? (
@@ -440,7 +412,7 @@ export default function ApprovalPage() {
               transition={{ delay: 1.5 }}
               className="max-w-lg mt-8 text-gray-800"
             >
-              Here's what we found about{" "} 
+              Here&apos;s what we found about{" "} 
               <span className="font-bold text-lg text-black">ACME Corporation,</span> please review each data point, feel free to edit any field, and confirm each section.
             </motion.div>
             <motion.button
