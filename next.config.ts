@@ -1,17 +1,18 @@
 import type { NextConfig } from "next";
 
+// Check if we're in Vercel environment
+const isVercel = process.env.VERCEL === '1';
+
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/qbv_client',
-  assetPrefix: '/qbv_client/',
-  trailingSlash: true,
+  // Only use basePath and assetPrefix for GitHub Pages, not for Vercel
+  ...(isVercel ? {} : {
+    basePath: '/qbv_client',
+    assetPrefix: '/qbv_client/',
+  }),
   images: {
     unoptimized: true,
   },
-  // Add experimental support for hash routing
-  experimental: {
-    scrollRestoration: true,
-  }
 };
 
 export default nextConfig;

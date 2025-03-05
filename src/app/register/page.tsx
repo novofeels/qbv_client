@@ -118,7 +118,7 @@ export default function RegisterPage() {
       {!showMessage && (
         <>
           <Image
-            src="/qbv_client/staticLogo.png"
+            src="/staticLogo.png"
             alt="Qusaiq Logo"
             width={150}
             height={150}
@@ -386,7 +386,7 @@ export default function RegisterPage() {
             transition={{ duration: 1, ease: "easeInOut" }}
           >
             <Image
-              src="/qbv_client/staticLogo.png"
+              src="/staticLogo.png"
               alt="Qusaiq Logo"
               width={200}
               height={200}
