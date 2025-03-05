@@ -1,6 +1,6 @@
 // src/components/CompetitionDetails.tsx
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+
 import { getStatusColor, getRingColor } from "../utils/colorUtils";
 
 interface CompetitionDetailsProps {
