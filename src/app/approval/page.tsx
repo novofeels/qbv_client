@@ -4,8 +4,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FaRobot, FaPlus, FaTrash } from "react-icons/fa";
 
-import { FaRobot } from "react-icons/fa";
+// Import the modals
+import AddSocial from "@/components/modals/AddSocial";
+import DeleteSocial from "@/components/modals/DeleteSocial";
 
 // Updated types
 type Competitor = {
@@ -13,6 +16,11 @@ type Competitor = {
   URL: string;
 };
 
+// Updated social media type to be dynamic
+type SocialMediaItem = {
+  platform: string;
+  link: string;
+};
 
 type ApprovalData = {
   basics: {
@@ -34,14 +42,10 @@ type ApprovalData = {
     brandFoundingDate: string;
     historicalTidbits: string;
   };
-  socialMedia: {
-    facebook: string;
-    twitter: string;
-    instagram: string;
-  };
+  socialMedia: SocialMediaItem[];
 };
 
-// Initial sample data
+// Initial sample data with updated socialMedia structure
 const initialApprovalData: ApprovalData = {
   basics: {
     firstName: "John",
@@ -67,23 +71,23 @@ const initialApprovalData: ApprovalData = {
     historicalTidbits:
       "Brand X was the only brand in the category until 2021 when several competitors entered.",
   },
-  socialMedia: {
-    facebook: "https://facebook.com/pinnacle",
-    twitter: "https://twitter.com/pinnacle",
-    instagram: "https://instagram.com/pinnacle",
-  },
+  socialMedia: [
+    { platform: "Facebook", link: "https://facebook.com/pinnacle" },
+    { platform: "Twitter", link: "https://twitter.com/pinnacle" },
+    { platform: "Instagram", link: "https://instagram.com/pinnacle" },
+  ],
 };
 
 // We'll refer to each section by a key
 type SectionKey = keyof ApprovalData;
 
-// Each data point needs to be confirmed with a checkbox.
+// Updated confirm state to work with new social media structure
 type ConfirmState = {
   basics: { [K in keyof ApprovalData["basics"]]: boolean };
   financials: { [K in keyof ApprovalData["financials"]]: boolean };
   competitors: Array<{ brand: boolean; URL: boolean }>;
   history: { [K in keyof ApprovalData["history"]]: boolean };
-  socialMedia: { [K in keyof ApprovalData["socialMedia"]]: boolean };
+  socialMedia: Array<{ platform: boolean; link: boolean }>;
 };
 
 const initialConfirmState: ConfirmState = {
@@ -110,17 +114,12 @@ const initialConfirmState: ConfirmState = {
     brandFoundingDate: false,
     historicalTidbits: false,
   },
-  socialMedia: {
-    facebook: false,
-    twitter: false,
-    instagram: false,
-  },
+  socialMedia: [
+    { platform: false, link: false },
+    { platform: false, link: false },
+    { platform: false, link: false },
+  ],
 };
-
-// For editing, we track whether a field is in edit mode.
-
-
-
 
 // A simple ProgressBar component
 type ProgressBarProps = {
@@ -184,7 +183,10 @@ export default function ApprovalPage() {
   const [currentSection, setCurrentSection] = useState<SectionKey>("basics");
   const [approvalData, setApprovalData] = useState<ApprovalData>(initialApprovalData);
   const [confirmState, setConfirmState] = useState<ConfirmState>(initialConfirmState);
-
+  // For the modals
+  const [isAddSocialModalOpen, setIsAddSocialModalOpen] = useState(false);
+  const [isDeleteSocialModalOpen, setIsDeleteSocialModalOpen] = useState(false);
+  const [socialToDelete, setSocialToDelete] = useState<{index: number, platform: string} | null>(null);
 
   const [logoRotation, setLogoRotation] = useState(0);
   // New state for direction: 1 for next, -1 for back.
@@ -199,6 +201,8 @@ export default function ApprovalPage() {
   const isSectionConfirmed = (section: SectionKey): boolean => {
     if (section === "competitors") {
       return confirmState.competitors.every(comp => comp.brand && comp.URL);
+    } else if (section === "socialMedia") {
+      return confirmState.socialMedia.every(item => item.platform && item.link);
     } else {
       return Object.values(confirmState[section] as Record<string, boolean>).every(Boolean);
     }
@@ -217,6 +221,10 @@ export default function ApprovalPage() {
       const newCompetitors = [...confirmState.competitors];
       newCompetitors[index] = { ...newCompetitors[index], [field]: e.target.checked };
       setConfirmState(prev => ({ ...prev, competitors: newCompetitors }));
+    } else if (section === "socialMedia" && typeof index === "number") {
+      const newSocialMedia = [...confirmState.socialMedia];
+      newSocialMedia[index] = { ...newSocialMedia[index], [field]: e.target.checked };
+      setConfirmState(prev => ({ ...prev, socialMedia: newSocialMedia }));
     } else {
       setConfirmState(prev => ({
         ...prev,
@@ -234,6 +242,10 @@ export default function ApprovalPage() {
       const newCompetitors = [...approvalData.competitors];
       newCompetitors[index] = { ...newCompetitors[index], [field]: value };
       setApprovalData(prev => ({ ...prev, competitors: newCompetitors }));
+    } else if (section === "socialMedia" && typeof index === "number") {
+      const newSocialMedia = [...approvalData.socialMedia];
+      newSocialMedia[index] = { ...newSocialMedia[index], [field]: value };
+      setApprovalData(prev => ({ ...prev, socialMedia: newSocialMedia }));
     } else {
       setApprovalData(prev => ({
         ...prev,
@@ -243,6 +255,46 @@ export default function ApprovalPage() {
         },
       }));
     }
+  };
+
+  // Function to add a new social media item
+  const handleAddSocialMedia = (newSocial: { platform: string; link: string }) => {
+    // Add to approval data
+    const newSocialMedia = [...approvalData.socialMedia, newSocial];
+    setApprovalData(prev => ({ ...prev, socialMedia: newSocialMedia }));
+    
+    // Add to confirm state (default unconfirmed)
+    const newSocialMediaConfirm = [...confirmState.socialMedia, { platform: false, link: false }];
+    setConfirmState(prev => ({ ...prev, socialMedia: newSocialMediaConfirm }));
+  };
+  
+  // Function to open delete confirmation modal
+  const confirmDeleteSocialMedia = (index: number) => {
+    setSocialToDelete({
+      index,
+      platform: approvalData.socialMedia[index].platform
+    });
+    setIsDeleteSocialModalOpen(true);
+  };
+  
+  // Function to delete a social media item
+  const handleDeleteSocialMedia = () => {
+    if (socialToDelete === null) return;
+    
+    const index = socialToDelete.index;
+    
+    // Remove from approval data
+    const newSocialMedia = [...approvalData.socialMedia];
+    newSocialMedia.splice(index, 1);
+    setApprovalData(prev => ({ ...prev, socialMedia: newSocialMedia }));
+    
+    // Remove from confirm state
+    const newSocialMediaConfirm = [...confirmState.socialMedia];
+    newSocialMediaConfirm.splice(index, 1);
+    setConfirmState(prev => ({ ...prev, socialMedia: newSocialMediaConfirm }));
+    
+    // Reset
+    setSocialToDelete(null);
   };
 
   // When the user clicks "Next"
@@ -261,7 +313,6 @@ export default function ApprovalPage() {
           router.push("/dashboard");
         }, 5000);
       }, 600);
-
     }
   };
 
@@ -281,6 +332,8 @@ export default function ApprovalPage() {
     let value: string;
     if (section === "competitors" && typeof index === "number") {
       value = approvalData.competitors[index][fieldKey as keyof Competitor];
+    } else if (section === "socialMedia" && typeof index === "number") {
+      value = approvalData.socialMedia[index][fieldKey as keyof SocialMediaItem];
     } else {
       value = (approvalData[section] as Record<string, string>)[fieldKey];
     }
@@ -291,9 +344,11 @@ export default function ApprovalPage() {
             type="checkbox"
             className="checkbox checkbox-sm checkbox-secondary accent-[#7030A0] mr-1"
             checked={
-              section === "competitors" && typeof index === "number"
+              (section === "competitors" && typeof index === "number")
                 ? confirmState.competitors[index][fieldKey as keyof Competitor]
-                : (confirmState[section] as Record<string, boolean>)[fieldKey]
+                : (section === "socialMedia" && typeof index === "number")
+                  ? confirmState.socialMedia[index][fieldKey as keyof SocialMediaItem]
+                  : (confirmState[section] as Record<string, boolean>)[fieldKey]
             }
             onChange={handleCheckboxChange(section, fieldKey, index)}
           />
@@ -371,9 +426,52 @@ export default function ApprovalPage() {
       case "socialMedia":
         return (
           <div>
-            {renderField("socialMedia", "facebook", "Facebook")}
-            {renderField("socialMedia", "twitter", "Twitter")}
-            {renderField("socialMedia", "instagram", "Instagram")}
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-xl font-bold text-black">Social Media</h2>
+              <button
+                onClick={() => setIsAddSocialModalOpen(true)}
+                className="btn btn-circle btn-sm btn-primary bg-[#7030A0] text-white hover:bg-[#8040B0]"
+                aria-label="Add social media"
+              >
+                <FaPlus />
+              </button>
+            </div>
+            {approvalData.socialMedia.map((social, idx) => (
+              <div key={idx} className="mb-4">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-sm checkbox-secondary accent-[#7030A0] mr-2"
+                    checked={confirmState.socialMedia[idx].platform && confirmState.socialMedia[idx].link}
+                    onChange={(e) => {
+                      const newSocialMedia = [...confirmState.socialMedia];
+                      newSocialMedia[idx].platform = e.target.checked;
+                      newSocialMedia[idx].link = e.target.checked;
+                      setConfirmState(prev => ({ ...prev, socialMedia: newSocialMedia }));
+                    }}
+                  />
+                  <div className="text-purple-900 font-medium">{social.platform}</div>
+                  <button
+                    onClick={() => confirmDeleteSocialMedia(idx)}
+                    className="ml-auto text-red-500 hover:text-red-700 p-1"
+                    aria-label={`Delete ${social.platform}`}
+                  >
+                    <FaTrash size={14} />
+                  </button>
+                </div>
+                <div className="relative ml-6">
+                  <input
+                    type="text"
+                    value={social.link}
+                    onChange={(e) => handleInputChange("socialMedia", "link", e.target.value, idx)}
+                    className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-[#6f30a0] focus:ring-2 focus:ring-[#7030A0] focus:border-[#7030A0] focus:ring-opacity-50 mt-1"
+                  />
+                </div>
+              </div>
+            ))}
+            {approvalData.socialMedia.length === 0 && (
+              <p className="text-center text-gray-500 py-4">No social media links added yet</p>
+            )}
           </div>
         );
       default:
@@ -452,7 +550,7 @@ export default function ApprovalPage() {
                 transition={{ duration: 0.3 }}
               >
                 <h2 className="text-xl text-center font-semibold mb-2 text-black">
-                  {currentSection.toUpperCase()}
+                  {currentSection === "socialMedia" ? "SOCIAL MEDIA" : currentSection.toUpperCase()}
                 </h2>
                 {renderSection()}
               </motion.div>
@@ -483,6 +581,21 @@ export default function ApprovalPage() {
           </div>
         </>
       )}
+
+      {/* Add Social Media Modal */}
+      <AddSocial
+        isOpen={isAddSocialModalOpen}
+        onClose={() => setIsAddSocialModalOpen(false)}
+        onAdd={handleAddSocialMedia}
+      />
+      
+      {/* Delete Social Media Confirmation Modal */}
+      <DeleteSocial
+        isOpen={isDeleteSocialModalOpen}
+        onClose={() => setIsDeleteSocialModalOpen(false)}
+        onConfirm={handleDeleteSocialMedia}
+        platformName={socialToDelete?.platform || ''}
+      />
     </div>
   );
 }
