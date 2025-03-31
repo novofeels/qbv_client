@@ -34,8 +34,9 @@ type ApprovalData = {
   };
   financials: {
     companyRevenues: string;
+    profitMargin: string;
     brandRevenues: string;
-    EBITDA: string;
+    
   };
   competitors: Competitor[];
   history: {
@@ -57,9 +58,10 @@ const initialApprovalData: ApprovalData = {
     phone: "(123) 456-7890",
   },
   financials: {
-    companyRevenues: "$1M",
-    brandRevenues: "$500K",
-    EBITDA: "$12M",
+    companyRevenues: "$10,200,000",
+    profitMargin: "20%",  
+    brandRevenues: "$2,000,000",
+    
   },
   competitors: [
     { brand: "Competitor Brand One", URL: "www.fake.com" },
@@ -102,8 +104,9 @@ const initialConfirmState: ConfirmState = {
   },
   financials: {
     companyRevenues: false,
+    profitMargin: false, 
     brandRevenues: false,
-    EBITDA: false,
+   
   },
   competitors: [
     { brand: false, URL: false },
@@ -390,14 +393,51 @@ export default function ApprovalPage() {
             {renderField("basics", "phone", "Phone")}
           </div>
         );
-      case "financials":
-        return (
-          <div>
-            {renderField("financials", "companyRevenues", "Company Revenues")}
-            {renderField("financials", "brandRevenues", "Brand Revenues")}
-            {renderField("financials", "EBITDA", "EBITDA")}
-          </div>
-        );
+        case "financials":
+          return (
+            <div>
+              {renderField("financials", "companyRevenues", "Company Revenues")}
+              <div className="flex items-center justify-between py-3">
+                <div className="flex items-center w-full">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-sm checkbox-secondary accent-[#7030A0] mr-1"
+                    checked={confirmState.financials.profitMargin}
+                    onChange={handleCheckboxChange("financials", "profitMargin")}
+                  />
+                  <div className="relative w-full">
+                    <select
+                      value={approvalData.financials.profitMargin}
+                      onChange={(e) => handleInputChange("financials", "profitMargin", e.target.value)}
+                      className="peer block w-full px-4 py-2 border border-gray-800 bg-white text-black rounded-full focus:outline-[#7030A0] focus:ring-2 focus:ring-[#7030A0] focus:border-[#7030A0] focus:ring-opacity-50"
+                    >
+                      <option value="">Select profit margin range</option>
+                      <option value="0-10%">0-10%</option>
+                      <option value="10-20%">10-20%</option>
+                      <option value="20-30%">20-30%</option>
+                      <option value="30-40%">30-40%</option>
+                      <option value="40-50%">40-50%</option>
+                      <option value="50-60%">50-60%</option>
+                      <option value="60-70%">60-70%</option>
+                      <option value="70-80%">70-80%</option>
+                      <option value="80-90%">80-90%</option>
+                      <option value="90-100%">90-100%</option>
+                    </select>
+                    <label
+                      className="absolute left-4 transition-all duration-300 ease-in-out
+                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2
+                        peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
+                        peer-focus:top-0 peer-focus:-translate-y-4 peer-focus:text-xs peer-focus:text-[#7030A0]
+                        peer-valid:top-0 peer-valid:-translate-y-4 peer-valid:text-xs peer-valid:text-[#7030A0]"
+                    >
+                      Company Profit Margin Percentage Range
+                    </label>
+                  </div>
+                </div>
+              </div>
+              {renderField("financials", "brandRevenues", "Revenues Directly From Brand")}
+            </div>
+          );
       case "competitors":
         return (
           <div>

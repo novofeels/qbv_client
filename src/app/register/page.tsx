@@ -365,6 +365,29 @@ export default function RegisterPage() {
                   Passwords do not match.
                 </p>
               )}
+<div className="text-left">
+  <h3 className="text-sm text-[#7030A0] mb-2">Is your company publicly traded or private</h3>
+  <div className="flex space-x-4">
+    <label className="flex items-center cursor-pointer">
+      <input 
+        type="radio" 
+        name="companyType" 
+        value="public" 
+        className="radio radio-sm radio-primary checked:bg-[#7030A0] [box-shadow:none!important] border-gray-400" 
+      />
+      <span className="ml-2  text-sm">Public</span>
+    </label>
+    <label className="flex items-center cursor-pointer">
+      <input 
+        type="radio" 
+        name="companyType" 
+        value="private" 
+        className="radio radio-sm checked:bg-[#7030A0] [box-shadow:none!important] border-gray-400" 
+      />
+      <span className="ml-2  text-sm">Private</span>
+    </label>
+  </div>
+</div>
 
               <button
                 type="submit"
