@@ -46,6 +46,7 @@ interface Construct {
 }
 
 interface DashboardState {
+  currentCompanyId: string;
   pinnacleData: {
     name: string;
     overallScore: number;
@@ -53,16 +54,27 @@ interface DashboardState {
     keyStrengths: string[];
     areasForImprovement: string[];
   };
+  ghostcatData: {
+    name: string;
+    overallScore: number;
+    status: string;
+    keyStrengths: string[];
+    areasForImprovement: string[];
+  };
   awarenessData: ConstructData;
+  ghostcatAwarenessData: ConstructData;
   placeholderData: {
     subconstructs: Subconstruct[];
     recommendations: string[];
   };
   constructs: Construct[];
+  ghostcatConstructs: Construct[];
 }
 
 // Initial state based on the data from your component
 const initialState: DashboardState = {
+  currentCompanyId: 'pinnacle',
+  
   // Pinnacle Financial Partners data
   pinnacleData: {
     name: "Pinnacle Financial Partners",
@@ -78,7 +90,24 @@ const initialState: DashboardState = {
     ]
   },
 
-  // Awareness data
+  // Ghost-Cat E-Bikes data
+  ghostcatData: {
+    name: "Ghost-Cat Bikes",
+    overallScore: 51,
+    status: "Below Average",
+    keyStrengths: [
+      "Strong Instagram presence (12,500 followers)",
+      "Good engagement metrics (low bounce rate)",
+      "Growing social media audience (+8% MoM)"
+    ],
+    areasForImprovement: [
+      "Very limited website traffic (14/100, lowest among competitors)",
+      "Poor organic search visibility (28% of benchmark)",
+      "Minimal presence on Facebook (929 followers) and X (15 followers)"
+    ]
+  },
+
+  // Awareness data for Pinnacle
   awarenessData: {
     score: 11,
     traffic: 9,
@@ -195,7 +224,145 @@ const initialState: DashboardState = {
     ]
   },
 
-  // Placeholder data for other constructs
+  // Ghost-Cat Awareness data with real scores from the provided table
+  ghostcatAwarenessData: {
+    score: 51,
+    traffic: 14,
+    engagement: 54,
+    social: 86,
+    status: "Below Average",
+    socialChannels: [
+      { name: "Instagram", score: 89, icon: 'FaInstagram', color: "#E1306C" },
+      { name: "Facebook", score: 10, icon: 'FaFacebook', color: "#3B5998" },
+      { name: "X", score: 9, icon: 'SiX', color: "#000000" },
+      { name: "LinkedIn", score: 0, icon: 'FaLinkedin', color: "#0077B5" }
+    ],
+    competitors: [
+      {
+        name: "Goat Power Bikes",
+        score: 90,
+        status: "Market Leader",
+        traffic: 100,
+        engagement: 69,
+        social: 100,
+        keyStrengths: [
+          "Highest website traffic among competitors (251,489 visits)",
+          "Strong social media presence (15,600 total followers)",
+          "Leading market position in awareness metrics"
+        ],
+        areasForImprovement: [
+          "Recent traffic decline (-38.76% monthly change)",
+          "Could improve engagement metrics (69/100)"
+        ]
+      },
+      {
+        name: "E-Cells",
+        score: 58,
+        status: "Average Performer",
+        traffic: 43,
+        engagement: 50,
+        social: 80,
+        keyStrengths: [
+          "Strong Facebook presence (9,700 followers)",
+          "Decent website traffic with positive growth (+16.49%)",
+          "Balanced performance across metrics"
+        ],
+        areasForImprovement: [
+          "High bounce rate (51.01%)",
+          "Below average engagement metrics"
+        ]
+      },
+      {
+        name: "Wired-Freedom",
+        score: 40,
+        status: "Below Average",
+        traffic: 62,
+        engagement: 58,
+        social: 0,
+        keyStrengths: [
+          "Good website traffic (155,032 visits)",
+          "Positive traffic growth trend (+24.67%)",
+          "Decent engagement metrics"
+        ],
+        areasForImprovement: [
+          "No social media presence at all",
+          "Missing important marketing channels"
+        ]
+      },
+      {
+        name: "Philodo",
+        score: 41,
+        status: "Below Average",
+        traffic: 10,
+        engagement: 100,
+        social: 14,
+        keyStrengths: [
+          "Exceptional engagement metrics (best in class)",
+          "Excellent visit duration (7:13 minutes)",
+          "Very low bounce rate (22.38%)"
+        ],
+        areasForImprovement: [
+          "Very low website traffic (26,083 visits)",
+          "Limited social presence (mainly on Facebook)",
+          "Overall awareness challenges"
+        ]
+      },
+      {
+        name: "Meelod",
+        score: 28,
+        status: "Underperformer",
+        traffic: 23,
+        engagement: 50,
+        social: 12,
+        keyStrengths: [
+          "Positive traffic growth trend (+46.91%)",
+          "Balanced desktop/mobile traffic",
+          "Average engagement metrics"
+        ],
+        areasForImprovement: [
+          "Low website traffic overall",
+          "Very limited social media presence",
+          "Needs fundamental awareness improvements"
+        ]
+      }
+    ],
+    subconstructs: [
+      { 
+        name: "Website Traffic", 
+        score: 14, 
+        description: "Very low traffic volume (14/100, lowest among competitors)" 
+      },
+      { 
+        name: "Social Media Presence", 
+        score: 86, 
+        description: "Strong on Instagram (12,500 followers), minimal presence on other platforms" 
+      },
+      { 
+        name: "Engagement Metrics", 
+        score: 54, 
+        description: "Good bounce rate (34.83%), average time on site" 
+      },
+      { 
+        name: "Brand Search Volume", 
+        score: 32, 
+        description: "Limited organic search visibility for brand terms" 
+      },
+      { 
+        name: "Industry Visibility", 
+        score: 40, 
+        description: "Below average presence in industry publications and forums" 
+      }
+    ],
+    recommendations: [
+      "Prioritize website traffic growth through SEO and marketing campaigns",
+      "Leverage Instagram success to drive traffic to website",
+      "Develop Facebook strategy to increase followers (currently only 929)",
+      "Consider establishing LinkedIn presence for B2B opportunities",
+      "Implement content marketing to improve organic search visibility"
+    ]
+  },
+
+  // Placeholder data stays the same
   placeholderData: {
     subconstructs: [
       { name: "Subconstruct 1", score: 35, description: "Description goes here" },
@@ -210,7 +377,7 @@ const initialState: DashboardState = {
     ]
   },
 
-  // Main construct data
+  // Main construct data - Pinnacle
   constructs: [
     { 
       name: "Awareness", 
@@ -220,7 +387,7 @@ const initialState: DashboardState = {
     },
     { 
       name: "Perception", 
-      value: 15, 
+      value: 62, 
       details: "Brand perception measures how your brand is viewed by customers and the market. Your score indicates significant challenges in brand sentiment and market positioning.",
       data: null // Will be populated on initialization
     },
@@ -230,27 +397,53 @@ const initialState: DashboardState = {
       details: "This measures how your brand performs against direct competitors in your market. Your competitive position is significantly weaker than major players in your industry.",
       data: null // Will be populated on initialization
     },
+
+  ],
+
+  // Ghost-Cat constructs using real data from the table provided
+  ghostcatConstructs: [
     { 
-      name: "Insight", 
-      value: 8, 
-      details: "The insight score measures the effectiveness of your data collection and how well you understand your customers. Your score indicates a critical lack of customer insights.",
+      name: "Awareness", 
+      value: 51,
+      details: "Your brand awareness is below average compared to top competitors. Your social media presence is strong, but website traffic is very limited and needs significant improvement.",
       data: null // Will be populated on initialization
-    }
+    },
+    { 
+      name: "Perception", 
+      value: 60, 
+      details: "Brand perception measures how your brand is viewed by customers and the market. Your score indicates room for improvement in brand sentiment and customer perception.",
+      data: null // Will be populated on initialization
+    },
+    { 
+      name: "Competition", 
+      value: 32, 
+      details: "This measures how your brand performs against direct competitors in your market. Your position is below industry leaders but showing potential for growth.",
+      data: null // Will be populated on initialization
+    },
+    
+
   ]
 };
 
 // Helper function to populate the construct data
 const populateConstructData = (state: DashboardState) => {
   // Deep copy to avoid reference issues
-  const newConstructs = JSON.parse(JSON.stringify(state.constructs));
+  const newPinnacleConstructs = JSON.parse(JSON.stringify(state.constructs));
+  const newGhostcatConstructs = JSON.parse(JSON.stringify(state.ghostcatConstructs));
   
-  // Populate the data for each construct
-  newConstructs[0].data = state.awarenessData;
-  newConstructs[1].data = {...state.placeholderData, score: 15, status: "Critically Behind"};
-  newConstructs[2].data = {...state.placeholderData, score: 18, status: "Critically Behind"};
-  newConstructs[3].data = {...state.placeholderData, score: 8, status: "Critically Behind"};
+  // Populate the data for each Pinnacle construct
+  newPinnacleConstructs[0].data = state.awarenessData;
+  newPinnacleConstructs[1].data = {...state.placeholderData, score: 62, status: "Above Industry Average"};
+  newPinnacleConstructs[2].data = {...state.placeholderData, score: 18, status: "Critically Behind"};
+
   
-  return newConstructs;
+  // Populate the data for each Ghost-Cat construct
+  newGhostcatConstructs[0].data = state.ghostcatAwarenessData;
+  newGhostcatConstructs[1].data = {...state.placeholderData, score: 60, status: "Average"};
+  newGhostcatConstructs[2].data = {...state.placeholderData, score: 32, status: "Below Average"};
+
+  
+  return { pinnacle: newPinnacleConstructs, ghostcat: newGhostcatConstructs };
 };
 
 export const dashboardSlice = createSlice({
@@ -258,12 +451,21 @@ export const dashboardSlice = createSlice({
   initialState: (() => {
     // Initialize with populated constructs
     const state = {...initialState};
-    state.constructs = populateConstructData(state);
+    const populatedConstructs = populateConstructData(state);
+    state.constructs = populatedConstructs.pinnacle;
+    state.ghostcatConstructs = populatedConstructs.ghostcat;
     return state;
   })(),
   reducers: {
+    // Add a reducer to switch current company
+    setCurrentCompany: (state, action) => {
+      state.currentCompanyId = action.payload;
+    },
     updatePinnacleData: (state, action) => {
       state.pinnacleData = action.payload;
+    },
+    updateGhostcatData: (state, action) => {
+      state.ghostcatData = action.payload;
     },
     updateAwarenessData: (state, action) => {
       state.awarenessData = action.payload;
@@ -271,16 +473,37 @@ export const dashboardSlice = createSlice({
       state.constructs[0].data = action.payload;
       state.constructs[0].value = action.payload.score;
     },
+    updateGhostcatAwarenessData: (state, action) => {
+      state.ghostcatAwarenessData = action.payload;
+      // Update the corresponding construct as well
+      state.ghostcatConstructs[0].data = action.payload;
+      state.ghostcatConstructs[0].value = action.payload.score;
+    },
     updateConstruct: (state, action) => {
       const { index, data } = action.payload;
       if (index >= 0 && index < state.constructs.length) {
         state.constructs[index].data = data;
         state.constructs[index].value = data.score;
       }
+    },
+    updateGhostcatConstruct: (state, action) => {
+      const { index, data } = action.payload;
+      if (index >= 0 && index < state.ghostcatConstructs.length) {
+        state.ghostcatConstructs[index].data = data;
+        state.ghostcatConstructs[index].value = data.score;
+      }
     }
   }
 });
 
-export const { updatePinnacleData, updateAwarenessData, updateConstruct } = dashboardSlice.actions;
+export const { 
+  setCurrentCompany,
+  updatePinnacleData, 
+  updateGhostcatData,
+  updateAwarenessData, 
+  updateGhostcatAwarenessData,
+  updateConstruct,
+  updateGhostcatConstruct
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

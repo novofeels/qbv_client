@@ -1,0 +1,141 @@
+
+{
+  "social_media_analysis": {
+    "report_title": "E-Bike Brands Social Media Presence",
+    "date": "March 2025",
+    "companies": [
+      {
+        "business_name": "Ghost-Cat Bikes",
+        "social_media": {
+          "facebook": {
+            "has_account": true,
+            "followers": 929
+          },
+          "instagram": {
+            "has_account": true,
+            "followers": 12500
+          },
+          "linkedin": {
+            "has_account": false,
+            "followers": null
+          },
+          "x_twitter": {
+            "has_account": true,
+            "followers": 15
+          }
+        },
+        "total_followers": 13444
+      },
+      {
+        "business_name": "Goat Power Bikes",
+        "social_media": {
+          "facebook": {
+            "has_account": true,
+            "followers": 1500
+          },
+          "instagram": {
+            "has_account": true,
+            "followers": 14100
+          },
+          "linkedin": {
+            "has_account": false,
+            "followers": null
+          },
+          "x_twitter": {
+            "has_account": false,
+            "followers": null
+          }
+        },
+        "total_followers": 15600
+      },
+      {
+        "business_name": "E-Cells",
+        "social_media": {
+          "facebook": {
+            "has_account": true,
+            "followers": 9700
+          },
+          "instagram": {
+            "has_account": true,
+            "followers": 2546
+          },
+          "linkedin": {
+            "has_account": false,
+            "followers": null
+          },
+          "x_twitter": {
+            "has_account": true,
+            "followers": 172
+          }
+        },
+        "total_followers": 12418
+      },
+      {
+        "business_name": "Wired-Freedom",
+        "social_media": {
+          "facebook": {
+            "has_account": false,
+            "followers": null
+          },
+          "instagram": {
+            "has_account": false,
+            "followers": null
+          },
+          "linkedin": {
+            "has_account": false,
+            "followers": null
+          },
+          "x_twitter": {
+            "has_account": false,
+            "followers": null
+          }
+        },
+        "total_followers": 0
+      },
+      {
+        "business_name": "Meelod",
+        "social_media": {
+          "facebook": {
+            "has_account": true,
+            "followers": 78
+          },
+          "instagram": {
+            "has_account": true,
+            "followers": 1842
+          },
+          "linkedin": {
+            "has_account": false,
+            "followers": null
+          },
+          "x_twitter": {
+            "has_account": true,
+            "followers": 21
+          }
+        },
+        "total_followers": 1941
+      },
+      {
+        "business_name": "Philodo",
+        "social_media": {
+          "facebook": {
+            "has_account": true,
+            "followers": 2100
+          },
+          "instagram": {
+            "has_account": false,
+            "followers": null
+          },
+          "linkedin": {
+            "has_account": false,
+            "followers": null
+          },
+          "x_twitter": {
+            "has_account": true,
+            "followers": 9
+          }
+        },
+        "total_followers": 2109
+      }
+    ]
+  }
+}

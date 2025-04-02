@@ -1,7 +1,7 @@
 // src/components/AwarenessDetails.tsx
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaChevronDown, FaChevronUp, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaLinkedin, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 import { SiX } from "react-icons/si";
 import { useSelector } from "react-redux";
 import { getStatusColor, getRingColor } from "@/utils/colorUtils";
@@ -41,12 +41,14 @@ interface AwarenessDetailsProps {
     competitors: CompetitorData[];
   };
   pinnacleData: {
+    name: string;
     keyStrengths: string[];
     areasForImprovement: string[];
   };
+  companyId?: string; // Add this optional prop
 }
 
-const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps) => {
+const AwarenessDetails = ({ constructData, pinnacleData, companyId = 'pinnacle' }: AwarenessDetailsProps) => {
   const [showCompetitors, setShowCompetitors] = useState(false);
   // Get the detailed awareness data from the awareness slice
   const detailedAwarenessData = useSelector((state: RootState) => state.awareness);
@@ -57,6 +59,42 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
       yourPosition: "N/A", 
       percentile: "N/A", 
       gap: "N/A" 
+    }
+  };
+
+  // Get traffic description based on company
+  const getTrafficDescription = () => {
+    if (companyId === 'pinnacle') {
+      return "Very low website traffic (20% of benchmark)";
+    } else {
+      return "Very limited website traffic (14/100, lowest among competitors)";
+    }
+  };
+
+  // Get engagement description based on company
+  const getEngagementDescription = () => {
+    if (companyId === 'pinnacle') {
+      return "High bounce rate (194% of industry average)";
+    } else {
+      return "Good engagement metrics (54/100, low bounce rate)";
+    }
+  };
+
+  // Get social description based on company
+  const getSocialDescription = () => {
+    if (companyId === 'pinnacle') {
+      return "Nearly non-existent social media (1-2% of benchmarks)";
+    } else {
+      return "Strong on Instagram (12.5K followers), minimal on other platforms";
+    }
+  };
+
+  // Get social media alert message based on company
+  const getSocialAlertMessage = () => {
+    if (companyId === 'pinnacle') {
+      return "Your social media presence is critically behind industry standards. LinkedIn is your strongest channel but still only at 40% of benchmark. Other platforms have minimal presence, limiting your digital reach and brand awareness.";
+    } else {
+      return "Your social media presence is concentrated on Instagram with 12,500 followers, which compares well with industry peers. Facebook has minimal presence (929 followers) and X/Twitter is virtually non-existent (15 followers). Consider leveraging your Instagram success to improve other channels.";
     }
   };
 
@@ -95,33 +133,35 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 {/* Detailed tooltip for Traffic */}
                 <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-44 w-72 left-1/2 transform -translate-x-1/2">
                   <p className="font-bold mb-1">Website Traffic</p>
-                  <p className="mb-2">Only 20% of industry benchmark for total visitors</p>
+                  <p className="mb-2">
+                    {companyId === 'pinnacle' ? 
+                      "Only 20% of industry benchmark for total visitors" : 
+                      "Only 36,175 total visits, lowest among tracked competitors"}
+                  </p>
                   <div>
                     <p className="font-semibold border-b pb-1 mb-1">Monthly Stats</p>
                     <div className="flex justify-between my-1">
-                      <span>Website Visits:</span>
-                      <span>989,533</span>
+                      <span>Total Visits:</span>
+                      <span>{companyId === 'pinnacle' ? '989,533' : '36,175'}</span>
                     </div>
                     <div className="flex justify-between my-1">
-                      <span>Unique Website Visits:</span>
-                      <span>181,052</span>
+                      <span>Monthly Visits:</span>
+                      <span>{companyId === 'pinnacle' ? '181,052' : '12,058'}</span>
                     </div>
                     <div className="flex justify-between my-1">
-                      <span>Dedupe Visits:</span>
-                      <span>138,541</span>
+                      <span>Monthly Change:</span>
+                      <span>{companyId === 'pinnacle' ? '+5.2%' : '-15.82%'}</span>
                     </div>
-                    {detailedAwarenessData?.competitorPositioning?.traffic && (
-                      <div className="mt-2 pt-1 border-t border-gray-600">
-                        <div className="flex justify-between my-1 text-xs text-gray-300">
-                          <span>Industry Leader:</span>
-                          <span>22,230,000 visits</span>
-                        </div>
+                    <div className="mt-2 pt-1 border-t border-gray-600">
+                      <div className="flex justify-between my-1 text-xs text-gray-300">
+                        <span>Industry Leader:</span>
+                        <span>{companyId === 'pinnacle' ? 'Truist - 22.2M' : 'Goat Power - 251.5K'}</span>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500">Very low website traffic (20% of benchmark)</p>
+              <p className="text-xs text-gray-500">{getTrafficDescription()}</p>
             </div>
 
             {/* Engagement Gauge */}
@@ -136,33 +176,35 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 {/* Detailed tooltip for Engagement */}
                 <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-44 w-72 left-1/2 transform -translate-x-1/2">
                   <p className="font-bold mb-1">User Engagement</p>
-                  <p className="mb-2">Poor engagement with high bounce rate</p>
+                  <p className="mb-2">
+                    {companyId === 'pinnacle' ? 
+                      "Poor engagement with high bounce rate" : 
+                      "Good engagement metrics with low bounce rate"}
+                  </p>
                   <div>
                     <p className="font-semibold border-b pb-1 mb-1">Engagement Metrics</p>
                     <div className="flex justify-between my-1">
-                      <span>Visitor Time on Website:</span>
-                      <span>3:03</span>
+                      <span>Visit Duration:</span>
+                      <span>{companyId === 'pinnacle' ? '3:03' : '2:06'}</span>
                     </div>
                     <div className="flex justify-between my-1">
                       <span>Pages per Visit:</span>
-                      <span>1.66</span>
+                      <span>{companyId === 'pinnacle' ? '1.66' : '2.75'}</span>
                     </div>
                     <div className="flex justify-between my-1">
                       <span>Bounce Rate:</span>
-                      <span>58.10%</span>
+                      <span>{companyId === 'pinnacle' ? '58.10%' : '34.83%'}</span>
                     </div>
-                    {detailedAwarenessData?.trafficMetrics && (
-                      <div className="mt-2 pt-1 border-t border-gray-600">
-                        <div className="flex justify-between my-1 text-xs text-gray-300">
-                          <span>Industry Average:</span>
-                          <span>~18% bounce rate</span>
-                        </div>
+                    <div className="mt-2 pt-1 border-t border-gray-600">
+                      <div className="flex justify-between my-1 text-xs text-gray-300">
+                        <span>Industry Average:</span>
+                        <span>~{companyId === 'pinnacle' ? '18%' : '39%'} bounce rate</span>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500">High bounce rate (194% of industry average)</p>
+              <p className="text-xs text-gray-500">{getEngagementDescription()}</p>
             </div>
 
             {/* Social Gauge */}
@@ -177,41 +219,68 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 {/* Detailed tooltip for Social */}
                 <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-56 w-72 left-1/2 transform -translate-x-1/2">
                   <p className="font-bold mb-1">Social Media Presence</p>
-                  <p className="mb-2">Nearly non-existent social media presence</p>
+                  <p className="mb-2">
+                    {companyId === 'pinnacle' ? 
+                      "Nearly non-existent social media presence" : 
+                      "Strong on Instagram, limited presence on other platforms"}
+                  </p>
                   <div>
                     <p className="font-semibold border-b pb-1 mb-1">Social Followers</p>
                     <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                      <div className="flex justify-between my-1">
-                        <span>LinkedIn:</span>
-                        <span>20,200</span>
-                      </div>
-                      <div className="flex justify-between my-1">
-                        <span>Facebook:</span>
-                        <span>354</span>
-                      </div>
-                      <div className="flex justify-between my-1">
-                        <span>X:</span>
-                        <span>207</span>
-                      </div>
-                      <div className="flex justify-between my-1">
-                        <span>Instagram:</span>
-                        <span>520</span>
-                      </div>
+                      {companyId === 'pinnacle' ? (
+                        <>
+                          <div className="flex justify-between my-1">
+                            <span>LinkedIn:</span>
+                            <span>20,200</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>Facebook:</span>
+                            <span>354</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>X:</span>
+                            <span>207</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>Instagram:</span>
+                            <span>520</span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex justify-between my-1">
+                            <span>Instagram:</span>
+                            <span>12,500</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>Facebook:</span>
+                            <span>929</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>X:</span>
+                            <span>15</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>LinkedIn:</span>
+                            <span>0</span>
+                          </div>
+                        </>
+                      )}
                     </div>
                     <div className="mt-2 pt-1 border-t border-gray-600">
                       <div className="flex justify-between my-1 text-xs text-gray-300">
-                        <span>LinkedIn vs Benchmark:</span>
-                        <span>40% of target</span>
+                        <span>{companyId === 'pinnacle' ? 'LinkedIn vs Benchmark:' : 'Instagram vs Benchmark:'}</span>
+                        <span>{companyId === 'pinnacle' ? '40% of target' : '89% of leader'}</span>
                       </div>
                       <div className="flex justify-between my-1 text-xs text-gray-300">
-                        <span>Other Platforms:</span>
-                        <span>1-8% of benchmarks</span>
+                        <span>Total Social Followers:</span>
+                        <span>{companyId === 'pinnacle' ? '21,281' : '13,444'}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-gray-500">Nearly non-existent social media (1-2% of benchmarks)</p>
+              <p className="text-xs text-gray-500">{getSocialDescription()}</p>
             </div>
           </div>
         </div>
@@ -229,10 +298,26 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                 if (iconName === 'facebook' || iconName === 'FaFacebook') return FaFacebook;
                 if (iconName === 'x' || iconName === 'twitter' || iconName === 'FaTwitter' || iconName === 'FaX' || iconName === 'SiX') return SiX;
                 if (iconName === 'instagram' || iconName === 'FaInstagram') return FaInstagram;
+                if (iconName === 'youtube' || iconName === 'FaYoutube') return FaYoutube;
                 return FaInstagram; // Default fallback
               };
               
               const Icon = getIconComponent(channel);
+              
+              // Set correct follower data based on actual data
+              let followers = channel.followers;
+              
+              if (companyId === 'ghostcat') {
+                if (channel.name === 'Instagram') {
+                  followers = 12500;
+                } else if (channel.name === 'Facebook') {
+                  followers = 929;
+                } else if (channel.name === 'X') {
+                  followers = 15;
+                } else if (channel.name === 'LinkedIn') {
+                  followers = 0;
+                }
+              }
               
               return (
                 <div 
@@ -250,33 +335,55 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                     <p className="font-bold mb-1 border-b pb-1">Detailed Stats</p>
                     <p className="flex justify-between my-1">
                       <span>Followers:</span>
-                      <span>{detailedAwarenessData.socialChannels.find(c => 
-                        // Check for both X and Twitter for compatibility
-                        c.name === channel.name || 
-                        (c.name === 'X' && channel.name === 'Twitter') || 
-                        (c.name === 'Twitter' && channel.name === 'X'))?.followers?.toLocaleString() || 'N/A'}</span>
+                      <span>{
+                        companyId === 'pinnacle' ? 
+                          (channel.name === 'LinkedIn' ? '20,200' : 
+                           channel.name === 'Facebook' ? '354' : 
+                           channel.name === 'X' ? '207' : 
+                           channel.name === 'Instagram' ? '520' : 'N/A') : 
+                          (channel.name === 'Instagram' ? '12,500' : 
+                           channel.name === 'Facebook' ? '929' : 
+                           channel.name === 'X' ? '15' : 
+                           channel.name === 'LinkedIn' ? '0' : 'N/A')
+                      }</span>
                     </p>
-                    <p className="font-bold mt-2 mb-1 border-b pb-1">Competitor Data</p>
-                    {Object.entries(detailedAwarenessData.socialChannels.find(c => 
-                      // Check for both X and Twitter for compatibility
-                      c.name === channel.name || 
-                      (c.name === 'X' && channel.name === 'Twitter') || 
-                      (c.name === 'Twitter' && channel.name === 'X'))?.competitorData || {}).map(([key, value], i) => (
-                      <p key={i} className="flex justify-between my-1">
-                        <span>{key}:</span>
-                        <span>{value}</span>
-                      </p>
-                    ))}
+                    <p className="font-bold mt-2 mb-1 border-b pb-1">Industry Comparison</p>
+                    <p className="flex justify-between my-1">
+                      <span>Industry Leader:</span>
+                      <span>{
+                        companyId === 'pinnacle' ? 
+                          (channel.name === 'LinkedIn' ? '166,000' : 
+                           channel.name === 'Facebook' ? '359,300' : 
+                           channel.name === 'X' ? '23,600' : 
+                           channel.name === 'Instagram' ? '14,500' : 'N/A') : 
+                          (channel.name === 'Instagram' ? '14,100 (Goat Power)' : 
+                           channel.name === 'Facebook' ? '9,700 (E-Cells)' : 
+                           channel.name === 'X' ? '172 (E-Cells)' : 
+                           channel.name === 'LinkedIn' ? 'No presence' : 'N/A')
+                      }</span>
+                    </p>
+                    <p className="flex justify-between my-1">
+                      <span>Your Position:</span>
+                      <span>{
+                        companyId === 'pinnacle' ? 
+                          (channel.name === 'LinkedIn' ? 'Bottom 10%' : 'Bottom 5%') : 
+                          (channel.name === 'Instagram' ? '2nd place' : 
+                           channel.name === 'Facebook' ? '4th place' : 
+                           channel.name === 'X' ? '4th place' : 'No presence')
+                      }</span>
+                    </p>
                   </div>
                 </div>
               );
             })}
           </div>
           
-          <div className="mt-6 p-4 bg-yellow-50 rounded-md">
-            <h4 className="font-medium text-yellow-800 mb-2">Priority Action Required</h4>
+          <div className={`mt-6 p-4 ${companyId === 'pinnacle' ? 'bg-yellow-50' : 'bg-blue-50'} rounded-md`}>
+            <h4 className={`font-medium ${companyId === 'pinnacle' ? 'text-yellow-800' : 'text-blue-800'} mb-2`}>
+              {companyId === 'pinnacle' ? 'Priority Action Required' : 'Action Recommended'}
+            </h4>
             <p className="text-sm text-gray-700">
-              Your social media presence is critically behind industry standards. LinkedIn is your strongest channel but still only at 40% of benchmark. Other platforms have minimal presence, limiting your digital reach and brand awareness.
+              {getSocialAlertMessage()}
             </p>
           </div>
         </div>
@@ -361,9 +468,9 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {/* Pinnacle row */}
+                  {/* Your company row */}
                   <tr className="bg-pink-50">
-                    <td className="px-3 py-4 whitespace-nowrap font-medium">Pinnacle</td>
+                    <td className="px-3 py-4 whitespace-nowrap font-medium">{pinnacleData.name}</td>
                     <td className="px-3 py-4 whitespace-nowrap text-center">{constructData.score}</td>
                     <td className="px-3 py-4 whitespace-nowrap text-center">{constructData.traffic}</td>
                     <td className="px-3 py-4 whitespace-nowrap text-center">{constructData.engagement}</td>
@@ -391,7 +498,7 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center">
-                    <span className="w-24 text-sm">Pinnacle</span>
+                    <span className="w-24 text-sm">{pinnacleData.name.split(' ')[0]}</span>
                     <div className="flex-1 ml-2 relative group">
                       <div className="w-full bg-gray-200 rounded-full h-4 cursor-help">
                         <div 
@@ -399,22 +506,24 @@ const AwarenessDetails = ({ constructData, pinnacleData }: AwarenessDetailsProps
                           style={{ width: `${constructData.score}%` }}
                         ></div>
                         
-{/* Tooltip with positioning data */}
-<div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-32 left-1/2 transform -translate-x-1/2 w-64">
-  <p className="font-bold mb-1 border-b pb-1">Competitive Position</p>
-  <div className="flex justify-between my-1">
-    <span>Your Position:</span>
-    <span>{competitorPositioning.awareness.yourPosition}</span>
-  </div>
-  <div className="flex justify-between my-1">
-    <span>Average:</span>
-    <span>{competitorPositioning.awareness.average}</span>
-  </div>
-  <div className="flex justify-between my-1">
-    <span>Competitors:</span>
-    <span>{competitorPositioning.awareness.competitors.length}</span>
-  </div>
-</div>
+                        {/* Tooltip with positioning data */}
+                        <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-gray-900 text-white p-3 rounded shadow-lg text-xs -top-32 left-1/2 transform -translate-x-1/2 w-64">
+                          <p className="font-bold mb-1 border-b pb-1">Competitive Position</p>
+                          <div className="flex justify-between my-1">
+                            <span>Your Position:</span>
+                            <span>{competitorPositioning.awareness.yourPosition || 
+                              (companyId === 'pinnacle' ? 'Bottom 5%' : 'Average')}</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>Average:</span>
+                            <span>{competitorPositioning.awareness.average || 
+                              (companyId === 'pinnacle' ? '58.5' : '51.3')}</span>
+                          </div>
+                          <div className="flex justify-between my-1">
+                            <span>Competitors:</span>
+                            <span>{constructData.competitors.length}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <span className="ml-2 text-sm font-medium">{constructData.score}</span>

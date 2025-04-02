@@ -1,0 +1,161 @@
+{
+    "website_traffic_analysis": {
+      "report_title": "E-Bike Industry Competitor Analysis",
+      "timeframe": {
+        "start": "Dec 2024",
+        "end": "Feb 2025"
+      },
+      "companies": [
+        {
+          "business_name": "Ghost-Cat Bikes",
+          "traffic_data": {
+            "total_visits": 36175,
+            "monthly_change_percentage": -15.82,
+            "monthly_visits": 12058,
+            "monthly_unique_visitors": "N/A",
+            "device_breakdown": {
+              "desktop": 54.79,
+              "mobile_web": 45.21
+            },
+            "engagement_metrics": {
+              "pages_per_visit": 2.75,
+              "visit_duration": "00:02:06",
+              "bounce_rate": 34.83
+            }
+          },
+          "rankings": {
+            "global_rank": 1534727,
+            "country_rank": {
+              "value": 473290,
+              "country": "United States"
+            }
+          }
+        },
+        {
+          "business_name": "Goat Power Bikes",
+          "traffic_data": {
+            "total_visits": 251489,
+            "monthly_change_percentage": -38.76,
+            "monthly_visits": 83830,
+            "monthly_unique_visitors": "N/A",
+            "device_breakdown": {
+              "desktop": 28.42,
+              "mobile_web": 71.58
+            },
+            "engagement_metrics": {
+              "pages_per_visit": 4.66,
+              "visit_duration": "00:02:49",
+              "bounce_rate": 41.27
+            }
+          },
+          "rankings": {
+            "global_rank": 421561,
+            "country_rank": {
+              "value": 113034,
+              "country": "United States"
+            }
+          }
+        },
+        {
+          "business_name": "E-Cells",
+          "traffic_data": {
+            "total_visits": 108568,
+            "monthly_change_percentage": 16.49,
+            "monthly_visits": 36189,
+            "monthly_unique_visitors": "N/A",
+            "device_breakdown": {
+              "desktop": 31.44,
+              "mobile_web": 68.56
+            },
+            "engagement_metrics": {
+              "pages_per_visit": 3.13,
+              "visit_duration": "00:01:55",
+              "bounce_rate": 51.01
+            }
+          },
+          "rankings": {
+            "global_rank": 672181,
+            "country_rank": {
+              "value": 143695,
+              "country": "United States"
+            }
+          }
+        },
+        {
+          "business_name": "Wired-Freedom",
+          "traffic_data": {
+            "total_visits": 155032,
+            "monthly_change_percentage": 24.67,
+            "monthly_visits": 51677,
+            "monthly_unique_visitors": "N/A",
+            "device_breakdown": {
+              "desktop": 42.13,
+              "mobile_web": 57.87
+            },
+            "engagement_metrics": {
+              "pages_per_visit": 3.38,
+              "visit_duration": "00:02:24",
+              "bounce_rate": 40.99
+            }
+          },
+          "rankings": {
+            "global_rank": 511011,
+            "country_rank": {
+              "value": 115511,
+              "country": "United States"
+            }
+          }
+        },
+        {
+          "business_name": "Meelod",
+          "traffic_data": {
+            "total_visits": 58897,
+            "monthly_change_percentage": 46.91,
+            "monthly_visits": 19632,
+            "monthly_unique_visitors": "N/A",
+            "device_breakdown": {
+              "desktop": 50.72,
+              "mobile_web": 49.28
+            },
+            "engagement_metrics": {
+              "pages_per_visit": 2.57,
+              "visit_duration": "00:02:01",
+              "bounce_rate": 41.00
+            }
+          },
+          "rankings": {
+            "global_rank": 930894,
+            "country_rank": {
+              "value": 236801,
+              "country": "United States"
+            }
+          }
+        },
+        {
+          "business_name": "Philodo",
+          "traffic_data": {
+            "total_visits": 26083,
+            "monthly_change_percentage": 231.44,
+            "monthly_visits": 8694,
+            "monthly_unique_visitors": "N/A",
+            "device_breakdown": {
+              "desktop": 53.88,
+              "mobile_web": 46.12
+            },
+            "engagement_metrics": {
+              "pages_per_visit": 4.64,
+              "visit_duration": "00:07:13",
+              "bounce_rate": 22.38
+            }
+          },
+          "rankings": {
+            "global_rank": 1290714,
+            "country_rank": {
+              "value": 288606,
+              "country": "United States"
+            }
+          }
+        }
+      ]
+    }
+  }
