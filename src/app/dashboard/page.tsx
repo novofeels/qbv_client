@@ -55,7 +55,6 @@ export default function DashboardPage() {
     "Awareness measures your brand's visibility across digital channels including website traffic, social media presence, and industry mentions.",
     "Perception reflects consumer scores, employee ratings, and sentiment analysis from social media and news sources.",
     "Competition evaluates how well you are performing against your closest competitors in the market.",
-    "Insight measures how effectively you are living up to your stated mission and purpose."
   ];
 
   // Get the selected construct data if a construct is selected
@@ -206,13 +205,7 @@ export default function DashboardPage() {
             />
           )}
           
-          {selectedConstructIndex === 3 && (
-            <InsightDetails 
-              constructData={selectedConstruct.data} 
-              pinnacleData={companyData}
-              companyId={currentCompanyId}
-            />
-          )}
+
         </>
       )}
     </div>
