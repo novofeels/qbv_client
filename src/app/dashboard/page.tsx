@@ -13,7 +13,7 @@ import { setCurrentCompany } from "@/features/dashboard/dashboardSlice"; // Impo
 import AwarenessDetails from "@/components/AwarenessDetails";
 import PerceptionDetails from "@/components/PerceptionDetails";
 import CompetitionDetails from "@/components/CompetitionDetails";
-import InsightDetails from "@/components/InsightDetails";
+
 
 // Import utility functions
 import { getRingColor } from "@/utils/colorUtils";
@@ -105,14 +105,17 @@ export default function DashboardPage() {
           </div>
           
           <div className="flex items-baseline">
-            <DollarSign size={24} className="text-white opacity-90" />
-            <span className="text-white text-3xl md:text-4xl font-bold tracking-tight">
-              {new Intl.NumberFormat('en-US').format(currentCompanyId === 'pinnacle' ? 2500000 : 4750000)}
-            </span>
-            <span className="text-white text-lg ml-2 opacity-90 font-medium">
-              USD
-            </span>
-          </div>
+  <DollarSign size={24} className="text-white opacity-90" />
+  <span className="text-white text-3xl md:text-4xl font-bold tracking-tight">
+    {currentCompanyId === 'pinnacle' 
+      ? `${new Intl.NumberFormat('en-US').format(206952000)} - ${new Intl.NumberFormat('en-US').format(244129000)}`
+      : `${new Intl.NumberFormat('en-US').format(271000)} - ${new Intl.NumberFormat('en-US').format(301000)}`
+    }
+  </span>
+  <span className="text-white text-lg ml-2 opacity-90 font-medium">
+    USD
+  </span>
+</div>
           
           <div className="flex items-center mt-3">
             <div className="bg-white bg-opacity-20 px-2 py-1 rounded flex items-center">
