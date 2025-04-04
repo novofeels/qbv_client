@@ -467,7 +467,7 @@ const CompetitionDetails = ({ constructData, pinnacleData, companyId = 'pinnacle
                 <h5 className="font-medium text-green-800 mb-2">Strengths</h5>
                 <ul className="text-sm space-y-2">
                   {data.swotAnalysis?.strengths.map((strength, idx) => (
-                    <li key={idx} className="flex items-start">
+                    <li key={idx} className="flex items-start text-[#000000]">
                       <span className="mr-2 text-green-500">•</span> {strength}
                     </li>
                   ))}
@@ -480,7 +480,7 @@ const CompetitionDetails = ({ constructData, pinnacleData, companyId = 'pinnacle
                 <h5 className="font-medium text-red-800 mb-2">Weaknesses</h5>
                 <ul className="text-sm space-y-2">
                   {data.swotAnalysis?.weaknesses.map((weakness, idx) => (
-                    <li key={idx} className="flex items-start">
+                    <li key={idx} className="flex items-start text-[#000000]">
                       <span className="mr-2 text-red-500">•</span> {weakness}
                     </li>
                   ))}
@@ -493,7 +493,7 @@ const CompetitionDetails = ({ constructData, pinnacleData, companyId = 'pinnacle
                 <h5 className="font-medium text-blue-800 mb-2">Opportunities</h5>
                 <ul className="text-sm space-y-2">
                   {data.swotAnalysis?.opportunities.map((opportunity, idx) => (
-                    <li key={idx} className="flex items-start">
+                    <li key={idx} className="flex items-start text-[#000000]">
                       <span className="mr-2 text-blue-500">•</span> {opportunity}
                     </li>
                   ))}
@@ -506,7 +506,7 @@ const CompetitionDetails = ({ constructData, pinnacleData, companyId = 'pinnacle
                 <h5 className="font-medium text-orange-800 mb-2">Threats</h5>
                 <ul className="text-sm space-y-2">
                   {data.swotAnalysis?.threats.map((threat, idx) => (
-                    <li key={idx} className="flex items-start">
+                    <li key={idx} className="flex items-start text-[#000000]">
                       <span className="mr-2 text-orange-500">•</span> {threat}
                     </li>
                   ))}
@@ -523,9 +523,9 @@ const CompetitionDetails = ({ constructData, pinnacleData, companyId = 'pinnacle
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <h5 className="font-medium text-gray-800 mb-3">Awareness vs. Competition</h5>
-                <div className="space-y-3">
+                <div className="space-y-3 text-[#000000] border-r p-2">
                   <div>
-                    <div className="flex items-center">
+                    <div className="flex items-center ">
                       <span className="w-24 text-xs">You</span>
                       <div className="flex-1 ml-2">
                         <div className="w-full bg-gray-200 rounded-full h-3">
@@ -563,7 +563,7 @@ const CompetitionDetails = ({ constructData, pinnacleData, companyId = 'pinnacle
               
               <div>
                 <h5 className="font-medium text-gray-800 mb-3">Perception vs. Competition</h5>
-                <div className="space-y-3">
+                <div className="space-y-3 text-[#000000] p-2">
                   <div>
                     <div className="flex items-center">
                       <span className="w-24 text-xs">You</span>
